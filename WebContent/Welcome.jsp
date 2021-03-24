@@ -14,6 +14,10 @@ if(session.getAttribute("username")==null){
 %>
 
 Welcome ${username}
+<form action="FileUpload" method="post" enctype="multipart/form-data">
+<input type="file" name="file" multiple>
+<input type="submit" value="Upload">
+</form>
 
 <form action="Logout" method="get">
 <input type="submit" value="Log Out">
