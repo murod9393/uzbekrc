@@ -3,6 +3,7 @@ package uz.uzbekrc;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -25,6 +26,7 @@ public class FileUpload extends HttpServlet {
   
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+		PrintWriter out = response.getWriter();
 		
 		try {
 			
@@ -32,14 +34,16 @@ public class FileUpload extends HttpServlet {
 			List<FileItem> multiFiles = sf.parseRequest(request);
 			
 			for(FileItem item: multiFiles) {
-				item.write(new File("/mnt/hd1/UploadFile" + item.getName()));
-			
+				item.write(new File("/home/pi/Documents/" + item.getName()));
+			out.println("File: " + item.getName() + " Successfully uploaded!!!");
 			}
 			
 		} catch (Exception e) {
-			System.out.println(e);
+			
+			out.println(e);
+			out.println("file not uploaded");
 		}
-			System.out.println("file uploaded");
+			
 	}
 
 }
